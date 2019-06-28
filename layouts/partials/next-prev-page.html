@@ -35,8 +35,20 @@
     
 {{- if not $.Site.Params.disableNavChevron -}}
         {{ if .File }}
-        <div class="edit-link"><a href="{{ .Site.Params.editURL }}{{ replace .File.Dir "\\" "/" }}{{ .File.LogicalName }}" class="github-link" target="blank"><i class="icon-Edit"></i>
-            <span>{{T "Edit-this-page"}}</span></a></div>
+        <div class="edit-link">
+            <div class="edit-link__action">
+                <a href="{{ .Site.Params.editURL }}{{ replace .File.Dir "\\" "/" }}{{ .File.LogicalName }}" class="github-link" target="blank">
+                    <i class="icon-Edit"></i>
+                    <span>{{T "Edit-this-page"}}</span>
+                </a>
+            </div>
+
+            <div class="edit-link__action -internal">
+                <button onclick="getInternalContent({{ .Params.pageID }})">
+                    <i class="fa fa-folder-o"></i> Show Internal
+                </button>
+            </div>
+        </div>
         <!--<a class="nav-spacer"></a>-->
         {{ end }}
     {{- with ($.Scratch.Get "prevPage") -}}
